@@ -88,7 +88,7 @@ module.exports.addCart = (req, res) => {
 						}).then(() => {
 						cartCount++;
 						 const cartobj = new Cart({
-							 id: cartCount,
+							 id: cartCount+1,
 							 userId: req.body.userId,
 							 date: req.body.date,
 							 products: req.body.products,
