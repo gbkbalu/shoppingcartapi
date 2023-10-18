@@ -71,7 +71,7 @@ module.exports.getproductsbyname = (req, res) => {
 	const limit = Number(req.query.limit) || 0;
 	const sort = req.query.sort == 'desc' ? -1 : 1;
 
-	Product.find({title:name})
+	Product.find({title:{ $regex: "/\b"+name+"\b/i" }})
 		.select(['-_id'])
 		.limit(limit)
 		.sort({ id: sort })
