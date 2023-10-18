@@ -1,7 +1,7 @@
 const Product = require('../model/product');
 
 module.exports.getAllProducts = async(req, res) => {
-	const limit = Number(req.query.limit) || 0;
+	let limit = Number(req.query.limit) || 0;
 	let page = Number(req.query.page) || 0;
 	const sort = req.query.sort == 'desc' ? -1 : 1;
 	limit = limit <=0 ? 0 : limit;
