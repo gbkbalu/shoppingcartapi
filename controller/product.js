@@ -124,7 +124,7 @@ module.exports.editProduct = (req, res) => {
 			console.log("Product..."+product)
 			if(product == null || product == undefined){
 				res.status(400).json({message:"Invalid porduct, product not found with the provided details!"})
-				res.end();
+				return res.end();
 			}
 			product.title = req.body.title;
 			product.price= req.body.price;
@@ -135,12 +135,12 @@ module.exports.editProduct = (req, res) => {
 			  .then(product => res.json(product))
 			  .catch(err => {
 				console.log(err);
-				res.json({error:err.toStrin()});
+				res.json({error:err.toString()});
 			  })
 		})
 		.catch((err) => {
 			console.log(err)
-			res.json({error:err.toStrin()});
+			res.json({error:err.toString()});
 		});
 		// res.json({
 		// 	id: parseInt(req.params.id),
