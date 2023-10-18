@@ -71,7 +71,6 @@ module.exports.getproductsbyname = (req, res) => {
 	const limit = Number(req.query.limit) || 0;
 	const sort = req.query.sort == 'desc' ? -1 : 1;
 
-	console.log(name)
 	Product.find({title:{$regex:req.params.name}})
 		.select(['-_id'])
 		.sort({ id: sort })
