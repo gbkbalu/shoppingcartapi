@@ -93,11 +93,11 @@ module.exports.addProduct = (req, res) => {
 		let productCount = 0;
 		Product.find()
 		  .countDocuments(function (err, count) {
-		    productCount = count;
+		    productCount = count + 1;
 		  })
 		  .then(() => {
 			const product = new Product({
-				id: productCount++,
+				id: productCount,
 				title: req.body.title,
 				price: req.body.price,
 				description: req.body.description,
