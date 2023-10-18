@@ -121,6 +121,11 @@ module.exports.editProduct = (req, res) => {
 		Product.findOne({
 			id: req.params.id,
 		}).then((product) => {
+			console.log("Product..."+product)
+			if(product == null || product == undefined){
+				res.status(400).json({message:"Invalid porduct, product not found with the provided details!"})
+				res.end();
+			}
 			product.title = req.body.title;
 			product.price= req.body.price;
 			product.description= req.body.description;
@@ -128,9 +133,15 @@ module.exports.editProduct = (req, res) => {
 			product.category= req.body.category;
 			product.save()
 			  .then(product => res.json(product))
-			  .catch(err => console.log(err))
+			  .catch(err => {
+				console.log(err);
+				res.json({error:err.toStrin()});
+			  })
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => {
+			console.log(err)
+			res.json({error:err.toStrin()});
+		});
 		// res.json({
 		// 	id: parseInt(req.params.id),
 		// 	title: req.body.title,
