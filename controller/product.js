@@ -67,13 +67,13 @@ module.exports.getProductCategories = (req, res) => {
 };
 
 module.exports.getproductsbyname = (req, res) => {
-	const name = req.params.name;
+	const name = "/\\b"+req.params.name+"\\b/i";
 	const limit = Number(req.query.limit) || 0;
 	const sort = req.query.sort == 'desc' ? -1 : 1;
 
-	Product.find({title:{ $regex: /\b+name+\b/i, $options:"i" }})
+	console.log(name)
+	Product.find({title:{$regex:req.params.name}})
 		.select(['-_id'])
-		.limit(limit)
 		.sort({ id: sort })
 		.then((products) => {
 			res.json(products);

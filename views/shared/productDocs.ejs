@@ -207,7 +207,34 @@
         ]
         </code></pre>
 
-
+        <h3 id="p-name-by-search">Get products by name</h3>
+        <pre><code>fetch('<span class="c-api"><%= site.url %>products/getproductsbyname/256GB'<%- site.getHeaders %></span>)
+            .then(res=>res.json())
+            .then(json=>console.log(json))</code></pre>
+        <p>
+            <span class="tips">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-zap">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+            </span>You can also use limit(Number) and sort(asc|desc) as a query string to get your ideal results
+        </p>
+        <button class="show-output btn btn-outline">Show output</button>
+        <pre class="output-result"><code>
+            <span class="c-comment">//output</span>
+            [
+                {
+                    "id":11,
+                    "title":"Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
+                    "price":109,
+                    "description":"3D NAND flash are applied to deliver high transfer speeds Remarkable transfer speeds that enable faster bootup and improved overall system performance. The advanced SLC Cache Technology allows performance boost and longer lifespan 7mm slim design suitable for Ultrabooks and Ultra-slim notebooks. Supports TRIM command, Garbage Collection technology, RAID, and ECC (Error Checking & Correction) to provide the optimized performance and enhanced reliability.",
+                    "category":"electronics",
+                    "image":"http://fakeapidata.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+                    "rating":{"rate":4.8,"count":319}
+                }
+            ]
+        </code></pre>
 
         <h3 id="p-new">Add new product</h3>
         <pre><code>fetch('<span class="c-api"><%= site.url %>products'</span>,{
