@@ -66,6 +66,21 @@ module.exports.getProductCategories = (req, res) => {
 		.catch((err) => console.log(err));
 };
 
+module.exports.getproductsbyname = (req, res) => {
+	const name = req.params.name;
+	const limit = Number(req.query.limit) || 0;
+	const sort = req.query.sort == 'desc' ? -1 : 1;
+
+	Product.find({title:name})
+		.select(['-_id'])
+		.limit(limit)
+		.sort({ id: sort })
+		.then((products) => {
+			res.json(products);
+		})
+		.catch((err) => console.log(err));
+};
+
 module.exports.getProductsInCategory = (req, res) => {
 	const category = req.params.category;
 	const limit = Number(req.query.limit) || 0;

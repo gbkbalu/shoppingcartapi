@@ -4,6 +4,7 @@ const product = require("../controller/product");
 
 router.get("/", product.getAllProducts);
 router.get("/pagination", product.getProductsByPagination);
+router.get("/getproductsbyname/:name", product.getproductsbyname);
 router.get("/categories", product.getProductCategories);
 router.get("/category/:category", product.getProductsInCategory);
 router.get("/:id", product.getProduct);
