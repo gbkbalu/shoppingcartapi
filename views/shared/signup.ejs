@@ -1,0 +1,33 @@
+        <h2 class="heading margin-top-md" id="auth">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-user">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            User SignUp</h2>
+        <style>
+            .required::after {
+                content: ' *';
+                color: red;
+            }
+            .form-group label {
+                float: left;
+                padding-right: 5px;
+            }
+        </style>
+        <pre><code>
+            <form class="form-group"  id="userform">
+                <!-- <label class="required">Eamil:</label> -->
+                <input class="required" type="email" name="email" required placeholder="Email"/>
+                <input type="password" name="password" minlength="8" maxlength="20" placeholder="Password" required/>
+                <input type="text" name="firstname" placeholder="First Name" required/>
+                <input type="text" name="lastname" placeholder="Last Name" required/>
+                <input name="phone" type="text" maxlength="10" placeholder="Mobile" pattern="\d{10}" title="Please enter exactly 10 digits" required/>
+                <input name="street" type="text" placeholder="Street" required/>
+                <input name="city" type="text" placeholder="City" required/>
+                <input name="zipcode" type="text" minlength="6" maxlength="6" placeholder="Zipcode" required/>
+                <button type="submit" class="btn btn-primary" >Submit</button>
+                <button type="reset" class="btn btn-primary" >Clear</button>
+            </form>
+        </code></pre>

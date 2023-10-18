@@ -1,0 +1,57 @@
+<%- include("../shared/header.ejs") %>
+
+<section class="row">
+    <div class="col-md-12 code-area">
+        <%- include("../shared/signup.ejs") %>
+    </div>
+
+</section>
+<script>
+    const form = document.getElementById("userform");
+    form.addEventListener("submit", signupuser);
+
+    function signupuser (e) {
+        e.preventDefault();
+         // 1: get form data
+        const formData = new FormData(form);
+        // 2: store form data in object
+        const jsonObject = Object.fromEntries(formData);
+        
+        fetch('/users',{
+            method:"POST",
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(
+                {
+                    email: jsonObject.email,
+                    password: jsonObject.password,
+                    name:{
+                        firstname:jsonObject.firstname,
+                        lastname:jsonObject.lastname
+                    },
+                    address:{
+                        city:jsonObject.city,
+                        street:jsonObject.street,
+                        number:jsonObject.streetnum,
+                        zipcode:jsonObject.zipcode,
+                        geolocation:{
+                            lat:jsonObject.lat,
+                            long:jsonObject.long
+                        }
+                    },
+                    phone:jsonObject.phone
+                }
+            )
+        }).then(res=>res.json())
+        .then(result=>{
+            if(result.success){
+                form.reset();
+                alert("User created successfully!")
+            }else{
+                alert(result.message)
+            }
+
+            console.log(result)
+        })
+    }
+</script>
+<%- include("../shared/footer.ejs") %>

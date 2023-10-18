@@ -1,0 +1,33 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "FakeAPIData is a free online REST API that provides you fake e-commerce JSON data",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^5.3.2",
+    "bootstrap-css": "^4.0.0-alpha.5",
+    "composable-middleware": "^0.3.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.0",
+    "dotenv-expand": "^8.0.1",
+    "express": "^4.17.1",
+    "joi": "^17.10.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.9.6"
+  },
+  "devDependencies": {
+    "ejs": "^3.1.6",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.9",
+    "supertest": "^6.1.3"
+  }
+}
