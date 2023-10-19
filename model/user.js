@@ -42,7 +42,7 @@ const userSchema = new schema({
     phone:{type:String,required:true},
     createdAt: {type:Date, default:new Date()},
     updatedAt: {type:Date, default:new Date()},
-    status:{ type: boolean, default: true }
+    status:{ type: Boolean, default: true }
 })
 userSchema.methods.toJSON = function() {
     var obj = this.toObject()
