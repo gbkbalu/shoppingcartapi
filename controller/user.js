@@ -136,7 +136,8 @@ module.exports.addUser = async (req, res) => {
 							},
 						},
 						phone: req.body.phone,
-						createdAt: new Date()
+						createdAt: new Date(),
+						updatedAt: new Date()
 					});
 					user.save()
 					.then(user =>
