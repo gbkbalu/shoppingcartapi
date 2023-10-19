@@ -163,32 +163,29 @@ module.exports.editUser = (req, res) => {
 	} else {
 		User.findOne({ id: req.params.id })
 			.then((user) => {
-				// res.json(user);
 				if(user == null){
 					res.status(400).json({status: 'error',message:"User Not Found!, Provided UserId is invalid!"})
 					res.end();
 				}
-				user.email = req.body.email
-				user.password = req.body.password;
 				user.name = {
-					firstname: req.body.firstname,
-					lastname: req.body.lastname,
+					firstname: req.body.name.firstname,
+					lastname: req.body.name.lastname,
 				};
-				user.address={
-					city : req.body.address.city,
+				user.address = {
+					city: req.body.address.city,
 					street: req.body.address.street,
-					number: req.body.number,
-					zipcode: req.body.zipcode,
+					number: req.body.address.number,
+					zipcode: req.body.address.zipcode,
 					geolocation: {
 						lat: req.body.address.geolocation.lat,
 						long: req.body.address.geolocation.long,
 					}
 				};
-				user.phone = req.body.phone;
-
+				user.phone = req.body.phone,
+				user.updatedAt = new Date()
 				user.save()
 					.then(user =>
-						res.status(201).json({ success: true, details: "User registered successfully", message: "Email verification link has been sent to the provided mail for verification. Please check your inbox to verify the mail:" + user.email })
+						res.status(201).json({ success: true, details: "User details updated successfully!", message:"FYI! You can't update your email id."})
 					)
 					.catch(err => {
 						res.status(400);
@@ -196,26 +193,6 @@ module.exports.editUser = (req, res) => {
 					})
 			})
 			.catch((err) => console.log(err));
-		// res.json({
-		// 	id: parseInt(req.params.id),
-		// 	email: req.body.email,
-		// 	password: req.body.password,
-		// 	name: {
-		// 		firstname: req.body.firstname,
-		// 		lastname: req.body.lastname,
-		// 	},
-		// 	address: {
-		// 		city: req.body.address.city,
-		// 		street: req.body.address.street,
-		// 		number: req.body.number,
-		// 		zipcode: req.body.zipcode,
-		// 		geolocation: {
-		// 			lat: req.body.address.geolocation.lat,
-		// 			long: req.body.address.geolocation.long,
-		// 		},
-		// 	},
-		// 	phone: req.body.phone,
-		// });
 	}
 };
 
@@ -227,9 +204,16 @@ module.exports.deleteUser = (req, res) => {
 		});
 	} else {
 		User.findOne({ id: req.params.id })
-			.select(['-_id'])
 			.then((user) => {
-				res.json(user);
+				if(user == null || user == undefined){
+					res.status(400).json({message:"Invalid userid! User was not found with the provided id!"});
+					res.end();
+				}
+
+				User.updateOne({id:req.params.id},{$set:{status:false}}).then((user) => {
+					res.status(200).json({message:"User inactivated successfully!"});
+				})
+				.catch((err) => console.log(err));
 			})
 			.catch((err) => console.log(err));
 	}

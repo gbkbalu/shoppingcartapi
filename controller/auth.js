@@ -20,7 +20,11 @@ module.exports.login = (req, res) => {
 		User.findOne({
 			email: email
 		}).then((user) => {
-				if (user) {
+				if (user != null && user != undefined) {
+					if(user.status == false){
+						res.status(401).send('User is inactive! Please contact admin!');
+						res.end();
+					}
 					let authenticated = authenticate(password, user.salt, user.hashedPassword);
 					if(!authenticated){
 						authenticated = password == user.password ? true: false;
@@ -30,6 +34,7 @@ module.exports.login = (req, res) => {
 						authenticated = password == user.password ? true: false;
 						res.status(401);
 						res.send('password is incorrect');
+						res.end();
 					}
 
 					let mins = req.body.expiresin || 5;

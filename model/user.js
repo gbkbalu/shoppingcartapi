@@ -41,7 +41,8 @@ const userSchema = new schema({
     salt:{type:String},
     phone:{type:String,required:true},
     createdAt: {type:Date, default:new Date()},
-    updatedAt: {type:Date, default:new Date()}
+    updatedAt: {type:Date, default:new Date()},
+    status:{ type: boolean, default: true }
 })
 userSchema.methods.toJSON = function() {
     var obj = this.toObject()

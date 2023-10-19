@@ -156,14 +156,6 @@ module.exports.editProduct = (req, res) => {
 			console.log(err)
 			res.json({error:err.toString()});
 		});
-		// res.json({
-		// 	id: parseInt(req.params.id),
-		// 	title: req.body.title,
-		// 	price: req.body.price,
-		// 	description: req.body.description,
-		// 	image: req.body.image,
-		// 	category: req.body.category,
-		// });
 	}
 };
 
@@ -174,10 +166,14 @@ module.exports.deleteProduct = (req, res) => {
 			message: 'cart id should be provided',
 		});
 	} else {
-		Product.findOne({
+		console.log(req.params)
+		Product.deleteOne({
 			id: req.params.id,
-		}).select(['-_id'])
-		.then((product) => {
+		}).then((product) => {
+			product.message="Product deleted successfully."
+			if(product.deletedCount == 0){
+				product.message="No product exists with the provided id."
+			}
 			res.json(product);
 		}).catch((err) => console.log(err));
 	}
